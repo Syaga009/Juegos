@@ -11,13 +11,39 @@
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Juegos.json", {onProgress: UnityProgress});
     </script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/JudagePCorAndroid.json", {onProgress: UnityProgress});
+			 function Reset() 
+   			 {
+   			    var canvas = document.getElementById("#canvas"); 
+   			    canvas.height= document.documentElement.clientHeight;
+   			    canvas.width = document.documentElement.clientWidth; 
+   			 }
+   			function ShowObj() // Emprender Unity
+   			 {
+   				   var PC = IsPC();
+   				   gameInstance.SendMessage("ShowManager", "GetInformation",PC+'_'+1); // Los parámetros a su vez son: el objeto del script montado en la escena, el método de interacción con html en el script, los parámetros que deben pasarse.
+   			 }	 
+   			function IsPC() // Juzgar el método de ejecución de la plataforma
+   			{
+   					 var userAgentInfo = navigator.userAgent;
+   					 var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+   					 var flag = true;
+   					 for (var v = 0; v < Agents.length; v++)
+   					 {
+   						  if (userAgentInfo.indexOf(Agents[v]) > 0)
+   							{
+   								  flag = false;
+   			            break;
+   							}
+   					 }
+   					 return flag;
+   					    			}			
+       </script>
   </head>
-  <body>
-    <div class="webgl-content">
-      <div id="unityContainer" style="max-width:1366;height:768;"></div>
-      <script>
-      </script>
-      </div>
-    </div>
-  </body>
+  <body onload="Reset()" onresize="Reset()">
+         <div class="webgl-content"style="width: 100%; height: 100%" >
+         <div id="gameContainer" style="width: 100%; height: 100%"></div>
+       </div>
+     </body>
 </html>
