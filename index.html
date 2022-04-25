@@ -15,10 +15,15 @@
   <body>
     <div class="webgl-content">
       <div id="unityContainer" style="width: 100%; height: 70%"></div>
-      <div class="footer">
-        <div class="webgl-logo"></div>
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-        <div class="title">JuegosAlcadiadeTunja</div>
+      <script>
+        <link rel="manifest" href="http://yoursite.com/manifest.json">
+
+{
+   "name":"A nice title for your web app",
+   "display":"standalone",
+   "orientation":"landscape"
+}
+      </script>
       </div>
     </div>
   </body>
